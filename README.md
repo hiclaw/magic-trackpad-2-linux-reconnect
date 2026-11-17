@@ -73,6 +73,13 @@ seeds the BlueZ device record with a locally generated link key (never
 printed), restarts BlueZ, and waits for the trackpad to connect. It talks only
 to the trackpad and the local BlueZ state; nothing goes over the network.
 
+To keep it around as a command, copy it to `~/tools/trackpad-fix` and
+`chmod +x` it. `trackpad-fix --status` prints the adapter, the trackpad, the
+host address currently stored in the trackpad, and the BlueZ properties
+without changing anything — useful for telling "wrong host address" apart from
+"BlueZ lost the bond". Running it again when the trackpad is already connected
+exits without touching the pairing unless you pass `--force`.
+
 On hosts without `hid_magicmouse`, or if you want the full multitouch report
 declared in the SDP cache, the upstream project below has the extra tools.
 
@@ -151,6 +158,10 @@ MIT. See [LICENSE](LICENSE).
 脚本会把本机蓝牙适配器地址写进触控板，在 BlueZ 设备记录里放一把本地生成的链路密钥
 （不会打印），重启蓝牙服务，然后等触控板连上来。只在触控板和本机 BlueZ 之间操作，
 不联网。
+
+想长期留着用，把脚本拷成 `~/tools/trackpad-fix` 并 `chmod +x`。`trackpad-fix --status`
+只读：打印适配器、触控板、触控板里存的主机地址和 BlueZ 的属性，能分清是“主机地址不对”
+还是“BlueZ 丢了配对”。已经连着的时候再跑，不改配对就退出；确实要重做加 `--force`。
 
 内核没有 `hid_magicmouse`，或者想补 SDP 缓存里的完整多点触控报告，用下面上游项目的工具。
 
